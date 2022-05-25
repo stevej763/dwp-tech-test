@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,7 +22,13 @@ public class User {
     private final double latitude;
     private final double longitude;
 
-    public User(int id, String firstName, String lastName, String email, String ipAddress, double latitude, double longitude) {
+    public User(@JsonProperty("id") int id,
+                @JsonProperty("first_name") String firstName,
+                @JsonProperty("last_name") String lastName,
+                @JsonProperty("email") String email,
+                @JsonProperty("ip_address") String ipAddress,
+                @JsonProperty("latitude") double latitude,
+                @JsonProperty("longitude") double longitude) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

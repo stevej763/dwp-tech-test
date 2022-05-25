@@ -1,11 +1,11 @@
 package domain;
 
 import client.UserResource;
+import client.UsersInCityResponse;
 
 import java.util.List;
 
 public class Users {
-
 
     private final UserResource userResource;
 
@@ -13,8 +13,8 @@ public class Users {
         this.userResource = userResource;
     }
 
-    public List<User> findUsersInCity(String city) {
-        List<User> users = userResource.findUsersInCity(city);
-        return users;
+    public UsersInCityResponse findUsersInCity(String city) {
+        UsersInCityResponse usersInCity = userResource.findUsersInCity(city);
+        return usersInCity;
     }
 }
