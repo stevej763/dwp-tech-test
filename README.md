@@ -20,6 +20,6 @@ DWP Associate Java Software Engineer Code Test
 
 ## Guide
 
-[Component test for test #1](src/test/java/integration/UsersInCityComponentTest.java)
+[Integration test for test #1](src/test/java/integration/UsersInCityComponentTest.java)
 
-[Component test for task #2]()
+[Integration test for task #2](src/test/java/integration/UsersInRadiusOfCityIntegrationTest.java)

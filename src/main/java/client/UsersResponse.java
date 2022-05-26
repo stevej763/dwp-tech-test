@@ -9,12 +9,12 @@ import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
-public class UsersInCityResponse {
+public class UsersResponse {
 
     private final List<User> users;
     private final HttpStatus statusCode;
 
-    public UsersInCityResponse(List<User> users, HttpStatus statusCode) {
+    public UsersResponse(List<User> users, HttpStatus statusCode) {
         this.users = users;
         this.statusCode = statusCode;
     }

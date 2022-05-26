@@ -1,6 +1,9 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigDecimal;
 
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
@@ -58,6 +61,11 @@ public class User {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    @JsonIgnore
+    public DecimalCoordinates getDecimalCoordinates() {
+        return new DecimalCoordinates(BigDecimal.valueOf(latitude), BigDecimal.valueOf(longitude));
     }
 
     @Override
