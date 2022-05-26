@@ -39,6 +39,6 @@ public class UsersTest {
 
         UsersInCityResponse result = underTest.findUsersInCity(city);
 
-        assertThat(result, is(is(new UsersInCityResponse(emptyList(), HttpStatus.OK))));
+        assertThat(result, (is(new UsersInCityResponse(emptyList(), HttpStatus.OK))));
     }
 }

@@ -6,6 +6,7 @@ import client.UsersInCityResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.Users;
 import org.hamcrest.core.Is;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
@@ -20,13 +21,14 @@ public class UsersInCityIntegrationTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void shouldReturnListOfUsersForAGivenCountry() {
+    public void shouldReturnUsersInCityResponseForProvidedCity() {
         UserResource userResource = new RestUserResource(restTemplate, API_URL, objectMapper);
 
         Users userService = new Users(userResource);
 
-        assertThat(userService.findUsersInCity("London").getClass(), is(UsersInCityResponse.class));
-        assertThat(userService.findUsersInCity("London").getStatusCode(), Is.is(HttpStatus.OK));
+        UsersInCityResponse result = userService.findUsersInCity("London");
+        assertThat(result.getClass(), is(UsersInCityResponse.class));
+        assertThat(result.getStatusCode(), Is.is(HttpStatus.OK));
     }
 
     @Test
@@ -35,8 +37,9 @@ public class UsersInCityIntegrationTest {
 
         Users userService = new Users(userResource);
 
-        assertThat(userService.findUsersInCity("London").getClass(), is(UsersInCityResponse.class));
-        assertThat(userService.findUsersInCity("London").getStatusCode(), Is.is(HttpStatus.BAD_REQUEST));
+        UsersInCityResponse result = userService.findUsersInCity("London");
+        assertThat(result.getClass(), is(UsersInCityResponse.class));
+        assertThat(result.getStatusCode(), Is.is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
@@ -45,7 +48,8 @@ public class UsersInCityIntegrationTest {
 
         Users userService = new Users(userResource);
 
-        assertThat(userService.findUsersInCity("London").getClass(), is(UsersInCityResponse.class));
-        assertThat(userService.findUsersInCity("London").getStatusCode(), Is.is(HttpStatus.BAD_REQUEST));
+        UsersInCityResponse result = userService.findUsersInCity("London");
+        assertThat(result.getClass(), is(UsersInCityResponse.class));
+        assertThat(result.getStatusCode(), Is.is(HttpStatus.BAD_REQUEST));
     }
 }

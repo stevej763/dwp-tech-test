@@ -8,6 +8,8 @@ import domain.User;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -15,8 +17,7 @@ import java.util.List;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class RestUserResourceTest {
 
@@ -49,6 +50,24 @@ public class RestUserResourceTest {
         UsersInCityResponse response = new UsersInCityResponse(emptyList(), HttpStatus.BAD_REQUEST);
 
         when(restTemplate.getForEntity(usersForCityEndpoint, String.class)).thenReturn(ResponseEntity.badRequest().build());
+
+        assertThat(underTest.findUsersInCity(city), is(response));
+    }
+
+    @Test
+    public void catchesResourceAccessException() {
+        UsersInCityResponse response = new UsersInCityResponse(emptyList(), HttpStatus.BAD_REQUEST);
+
+        when(restTemplate.getForEntity(usersForCityEndpoint, String.class)).thenThrow(new ResourceAccessException(HttpStatus.BAD_REQUEST.toString()));
+
+        assertThat(underTest.findUsersInCity(city), is(response));
+    }
+
+    @Test
+    public void catchesHttpClientErrorException() {
+        UsersInCityResponse response = new UsersInCityResponse(emptyList(), HttpStatus.BAD_REQUEST);
+
+        when(restTemplate.getForEntity(usersForCityEndpoint, String.class)).thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
 
         assertThat(underTest.findUsersInCity(city), is(response));
     }

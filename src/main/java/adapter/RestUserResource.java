@@ -35,7 +35,7 @@ public class RestUserResource implements UserResource {
     @Override
     public UsersInCityResponse findUsersInCity(String city) {
         String endpoint = apiUrl + "/city/" + city + "/users";
-        ResponseEntity<String> response = makeRequest(endpoint);
+        ResponseEntity<String> response = makeGetRequest(endpoint);
         if (response.getStatusCode().is2xxSuccessful()) {
                 return handleResponse(response);
         } else {
@@ -43,7 +43,7 @@ public class RestUserResource implements UserResource {
         }
     }
 
-    private ResponseEntity<String> makeRequest(String endpoint) {
+    private ResponseEntity<String> makeGetRequest(String endpoint) {
         try {
             return restTemplate.getForEntity(endpoint, String.class);
         } catch (ResourceAccessException | HttpClientErrorException exception) {
@@ -53,14 +53,12 @@ public class RestUserResource implements UserResource {
     }
 
     private UsersInCityResponse handleResponse(ResponseEntity<String> response) {
-        String responseBody = response.getBody();
-        HttpStatus responseStatusCode = response.getStatusCode();
         try {
-            List<User> users = toUserList(responseBody);
-            return new UsersInCityResponse(users, responseStatusCode);
+            List<User> users = toUserList(response.getBody());
+            return new UsersInCityResponse(users, response.getStatusCode());
         } catch (JsonProcessingException exception) {
             LOGGER.error("Error handling Json response from API message={}", exception.getMessage());
-            return new UsersInCityResponse(emptyList(), responseStatusCode);
+            return new UsersInCityResponse(emptyList(), response.getStatusCode());
         }
     }
 

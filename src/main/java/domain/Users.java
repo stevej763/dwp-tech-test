@@ -3,7 +3,6 @@ package domain;
 import client.UserResource;
 import client.UsersInCityResponse;
 
-import java.util.List;
 
 public class Users {
 
