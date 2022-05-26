@@ -23,8 +23,8 @@ public class Users {
         this.geodesicClient = geodesicClient;
     }
 
-    public UsersResponse findUsersInCity(String city) {
-        UsersResponse usersInCity = userResource.findUsersInCity(city);
+    public UsersResponse findUsersInCity(City city) {
+        UsersResponse usersInCity = userResource.findUsersInCity(city.getName());
         return usersInCity;
     }
 

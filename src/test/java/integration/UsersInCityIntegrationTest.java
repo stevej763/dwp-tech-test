@@ -8,6 +8,7 @@ import org.hamcrest.core.Is;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
+import static domain.City.LONDON;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -19,7 +20,7 @@ public class UsersInCityIntegrationTest extends BaseIntegrationTest {
 
         Users userService = new Users(userResource, geodesicClient);
 
-        UsersResponse result = userService.findUsersInCity("London");
+        UsersResponse result = userService.findUsersInCity(LONDON);
         assertThat(result.getClass(), is(UsersResponse.class));
         assertThat(result.getStatusCode(), Is.is(HttpStatus.OK));
     }
@@ -30,19 +31,19 @@ public class UsersInCityIntegrationTest extends BaseIntegrationTest {
 
         Users userService = new Users(userResource, geodesicClient);
 
-        UsersResponse result = userService.findUsersInCity("London");
+        UsersResponse result = userService.findUsersInCity(LONDON);
         assertThat(result.getClass(), is(UsersResponse.class));
         assertThat(result.getStatusCode(), Is.is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
     public void shouldReturnErrorIfApiInvalid() {
-        mockInvalidApi("/city/London/users");
+        mockInvalidApiForEndpoint("/city/London/users");
         UserResource userResource = new RestUserResource(mockedRestTemplate, API_URL, objectMapper);
 
         Users userService = new Users(userResource, geodesicClient);
 
-        UsersResponse result = userService.findUsersInCity("London");
+        UsersResponse result = userService.findUsersInCity(LONDON);
         assertThat(result.getClass(), is(UsersResponse.class));
         assertThat(result.getStatusCode(), Is.is(HttpStatus.BAD_REQUEST));
     }

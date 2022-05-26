@@ -20,7 +20,6 @@ import static org.mockito.Mockito.when;
 public class UsersTest {
 
     private final UserResource userResource = mock(UserResource.class);
-    private final String city = "city";
     private final GeodesicClient geodesicClient = mock(GeodesicClient.class);
     private final Users underTest = new Users(userResource, geodesicClient);
 
@@ -28,7 +27,6 @@ public class UsersTest {
     public void setUp() {
         when(geodesicClient.getDistanceInMilesBetweenTwoCoordinates(any(), any()))
                 .thenReturn(new BigDecimal("100"));
-
     }
 
     @Test
@@ -38,18 +36,18 @@ public class UsersTest {
                 new User(2, "first", "last", "email", "ip", 10.2, 10.2),
                 new User(3, "first", "last", "email", "ip", 10.3, 10.3));
 
-        when(userResource.findUsersInCity(city)).thenReturn(new UsersResponse(users, HttpStatus.OK));
+        when(userResource.findUsersInCity(LONDON.getName())).thenReturn(new UsersResponse(users, HttpStatus.OK));
 
-        UsersResponse result = underTest.findUsersInCity(city);
+        UsersResponse result = underTest.findUsersInCity(LONDON);
 
         assertThat(result, is(new UsersResponse(users, HttpStatus.OK)));
     }
 
     @Test
     public void returnsResponseWithEmptyListIfNoUsersFoundForCity() {
-        when(userResource.findUsersInCity(city)).thenReturn(new UsersResponse(emptyList(), HttpStatus.OK));
+        when(userResource.findUsersInCity(LONDON.getName())).thenReturn(new UsersResponse(emptyList(), HttpStatus.OK));
 
-        UsersResponse result = underTest.findUsersInCity(city);
+        UsersResponse result = underTest.findUsersInCity(LONDON);
 
         assertThat(result, (is(new UsersResponse(emptyList(), HttpStatus.OK))));
     }
@@ -60,7 +58,8 @@ public class UsersTest {
         List<User> allUsers = List.of(
                 userInRadiusOfCity,
                 new User(2, "first", "last", "email", "ip", 10.2, 10.2),
-                new User(3, "first", "last", "email", "ip", 10.3, 10.3));
+                new User(3, "first", "last", "email", "ip", 10.3, 10.3)
+        );
 
         when(userResource.allUsers()).thenReturn(new UsersResponse(allUsers, HttpStatus.OK));
         when(geodesicClient.getDistanceInMilesBetweenTwoCoordinates(LONDON.getDecimalCoordinates(), userInRadiusOfCity.getDecimalCoordinates()))

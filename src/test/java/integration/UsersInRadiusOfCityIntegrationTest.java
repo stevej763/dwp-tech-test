@@ -48,7 +48,7 @@ public class UsersInRadiusOfCityIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void shouldReturnErrorIfApiInvalid() {
-        mockInvalidApi("/users");
+        mockInvalidApiForEndpoint("/users");
         UserResource userResource = new RestUserResource(mockedRestTemplate, API_URL, objectMapper);
 
         Users userService = new Users(userResource, geodesicClient);
