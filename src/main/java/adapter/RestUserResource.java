@@ -36,7 +36,7 @@ public class RestUserResource implements UserResource {
         String endpoint = apiUrl + "/city/" + city + "/users";
         ResponseEntity<String> response = makeGetRequest(endpoint);
         if (response.getStatusCode().is2xxSuccessful()) {
-                return handleResponse(response);
+            return handleResponse(response);
         } else {
             return new UsersResponse(emptyList(), response.getStatusCode());
         }
@@ -57,7 +57,7 @@ public class RestUserResource implements UserResource {
         try {
             return restTemplate.getForEntity(endpoint, String.class);
         } catch (ResourceAccessException | HttpClientErrorException exception) {
-            LOGGER.error("Error making request to url={} message={}",endpoint, exception.getMessage());
+            LOGGER.error("Error making request to url={} message={}", endpoint, exception.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }

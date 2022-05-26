@@ -65,7 +65,7 @@ public class UsersTest {
         when(geodesicClient.getDistanceInMilesBetweenTwoCoordinates(LONDON.getDecimalCoordinates(), userInRadiusOfCity.getDecimalCoordinates()))
                 .thenReturn(new BigDecimal("50"));
 
-        UsersResponse result = underTest.findUsersInRadiusOfCity(LONDON, new BigDecimal("50"));
+        UsersResponse result = underTest.findUsersInRadiusOfCity(LONDON, 50);
 
         UsersResponse expected = new UsersResponse(List.of(userInRadiusOfCity), HttpStatus.OK);
         assertThat(result, is(expected));

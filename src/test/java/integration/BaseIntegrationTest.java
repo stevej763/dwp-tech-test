@@ -18,7 +18,7 @@ public class BaseIntegrationTest {
     protected final GeodesicClient geodesicClient = new GeodesicClient();
 
     protected void mockInvalidApiForEndpoint(String endpoint) {
-        when(mockedRestTemplate.getForEntity(API_URL + endpoint, String.class)).
-                thenThrow(new ResourceAccessException("mocked invalid api url"));
+        when(mockedRestTemplate.getForEntity(API_URL + endpoint, String.class))
+                .thenThrow(new ResourceAccessException("mocked invalid api url"));
     }
 }

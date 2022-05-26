@@ -28,7 +28,7 @@ public class Users {
         return usersInCity;
     }
 
-    public UsersResponse findUsersInRadiusOfCity(City city, BigDecimal radius) {
+    public UsersResponse findUsersInRadiusOfCity(City city, double radius) {
         UsersResponse usersResponse = userResource.allUsers();
         List<User> result = usersResponse.getUsers().stream()
                 .filter(user -> isWithinRadiusOfCity(user, city, radius))
@@ -36,9 +36,8 @@ public class Users {
         return new UsersResponse(result, usersResponse.getStatusCode());
     }
 
-    private boolean isWithinRadiusOfCity(User user, City city, BigDecimal radius) {
+    private boolean isWithinRadiusOfCity(User user, City city, double radius) {
         BigDecimal milesFromCity = geodesicClient.getDistanceInMilesBetweenTwoCoordinates(city.getDecimalCoordinates(), user.getDecimalCoordinates());
-        LOGGER.info("userId={} distanceFromCityInMiles={}", user.getId(), milesFromCity);
-        return milesFromCity.compareTo(radius) < 1;
+        return milesFromCity.compareTo(BigDecimal.valueOf(radius)) < 1;
     }
 }

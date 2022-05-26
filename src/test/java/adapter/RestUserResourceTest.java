@@ -24,11 +24,13 @@ public class RestUserResourceTest {
     private final RestTemplate restTemplate = mock(RestTemplate.class);
     private final ObjectMapper objectMapper = mock(ObjectMapper.class);
     private final ObjectReader objectReader = mock(ObjectReader.class);
+
     private final String apiUrl = "url";
-    private final RestUserResource underTest = new RestUserResource(restTemplate, apiUrl, objectMapper);
     private final String city = "city";
     private final String usersForCityEndpoint = apiUrl + "/city/" + city + "/users";
     private final String allUsersEndpoint = apiUrl + "/users";
+
+    private final RestUserResource underTest = new RestUserResource(restTemplate, apiUrl, objectMapper);
 
     @Test
     public void handlesOkSuccessResponseForUsersInCityRequest() throws JsonProcessingException {

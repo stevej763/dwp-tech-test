@@ -9,18 +9,30 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
 import static domain.City.LONDON;
+import static domain.City.PARIS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class UsersInCityIntegrationTest extends BaseIntegrationTest {
 
     @Test
-    public void shouldReturnUsersInCityResponseForProvidedCity() {
+    public void shouldReturnUsersInCityResponseForLondon() {
         UserResource userResource = new RestUserResource(restTemplate, API_URL, objectMapper);
 
         Users userService = new Users(userResource, geodesicClient);
 
         UsersResponse result = userService.findUsersInCity(LONDON);
+        assertThat(result.getClass(), is(UsersResponse.class));
+        assertThat(result.getStatusCode(), Is.is(HttpStatus.OK));
+    }
+
+    @Test
+    public void shouldReturnUsersInCityResponseForParis() {
+        UserResource userResource = new RestUserResource(restTemplate, API_URL, objectMapper);
+
+        Users userService = new Users(userResource, geodesicClient);
+
+        UsersResponse result = userService.findUsersInCity(PARIS);
         assertThat(result.getClass(), is(UsersResponse.class));
         assertThat(result.getStatusCode(), Is.is(HttpStatus.OK));
     }

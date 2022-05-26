@@ -68,6 +68,11 @@ public class User {
         return new DecimalCoordinates(BigDecimal.valueOf(latitude), BigDecimal.valueOf(longitude));
     }
 
+    @JsonIgnore
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return reflectionEquals(this, obj);

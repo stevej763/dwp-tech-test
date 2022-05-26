@@ -18,4 +18,10 @@ public class UserTest {
         assertThat(underTest.getDecimalCoordinates(), is(expected));
     }
 
+    @Test
+    public void shouldReturnUsersFullName() {
+        User underTest = new User(1, "first", "last", "email", "ip", 10.1, 10.1);
+
+        assertThat(underTest.getFullName(), is("first last"));
+    }
 }

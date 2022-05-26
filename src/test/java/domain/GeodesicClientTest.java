@@ -19,5 +19,4 @@ public class GeodesicClientTest {
 
         assertThat(result, is(new BigDecimal("0.01")));
     }
-
 }
