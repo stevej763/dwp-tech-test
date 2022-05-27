@@ -19,7 +19,7 @@ import static java.util.Collections.emptyList;
 
 public class RestUserResource implements UserResource {
 
-    Logger LOGGER = LoggerFactory.getLogger(RestUserResource.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(RestUserResource.class);
 
     private final RestTemplate restTemplate;
     private final String apiUrl;

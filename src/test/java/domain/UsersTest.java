@@ -70,4 +70,13 @@ public class UsersTest {
         UsersResponse expected = new UsersResponse(List.of(userInRadiusOfCity), HttpStatus.OK);
         assertThat(result, is(expected));
     }
+
+    @Test
+    public void returnsResponseWithEmptyListIfNoUsersFoundWithinRadiusOfCity() {
+        when(userResource.allUsers()).thenReturn(new UsersResponse(emptyList(), HttpStatus.OK));
+
+        UsersResponse result = underTest.findUsersInRadiusOfCity(LONDON, 50);
+
+        assertThat(result, (is(new UsersResponse(emptyList(), HttpStatus.OK))));
+    }
 }
