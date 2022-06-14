@@ -1,4 +1,4 @@
-# DWP Associate Java Software Engineer Code Test
+# DWP Java Software Engineer Code Test
 
 ## Tasks
 
@@ -26,7 +26,7 @@ All the code was written following Test-Driven-Developement, each class that con
 
 ### Libraries
 
-For the second task I depend on the [Geodesic](https://geographiclib.sourceforge.io/html/java/net/sf/geographiclib/Geodesic.html) library in order to calculate the distance between two decimal coordinates.
+For the second task I depend on the [Geographiclib](https://geographiclib.sourceforge.io/html/java/net/sf/geographiclib/Geodesic.html) library in order to calculate the distance between two decimal coordinates.
 
 I made use of [Spring Boot](https://spring.io/projects/spring-boot), mainly for the `RestTemplate` client to make HTTP calls to the RESTful API provided. (I excluded Tomcat in the POM file to avoid the embedded webserver running on application startup)
 
